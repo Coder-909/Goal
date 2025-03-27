@@ -11,5 +11,6 @@ const createSchema = new Schema({
 });
 
   const Create = mongoose.model('Create', createSchema);
-module.exports = Create
+export default Create
+
 
