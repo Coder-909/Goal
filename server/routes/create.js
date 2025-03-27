@@ -1,8 +1,9 @@
 import express from "express"
+import mongoose from "mongoose"
 const router = express.Router()
 
 import CreateGoal from "../models/create.js";
-let conn = await mongoose.connect("mongodb://localhost:27017/Tasks");
+let conn = mongoose.connect("mongodb://localhost:27017/Tasks");
 
 // middleware that is specific to this router
 const timeLog = (req, res, next) => {
@@ -34,5 +35,5 @@ router.get('/about', (req, res) => {
   res.send('About birds')
 })
 
-module.exports = router
+export default router
 

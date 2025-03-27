@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const createSchema = new Schema({
+const createSchema = new mongoose.Schema({
   task: String,
   isDone: Boolean,
   deadline: Date
