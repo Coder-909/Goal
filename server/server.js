@@ -1,17 +1,19 @@
 import express from "express"
-const app = express()
-const port = 3000
-import Create from "./routes/create.js"
-import Read from "./routes/read.js"
-import Update from "./routes/update.js"
-app.use('/api', Create);
-// app.use('/api', Read);
-app.use('/api', Update);
+import connectDB from "./config/db.js"
+const app = express();
+const port = 3000;
+import router from "./routes/tasks-routes.js";
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+app.use('/api',router);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Welcome to home page!')
 })
 
 app.listen(port, () => {
+  connectDB();
   console.log(`Example app listening on port ${port}`)
 })
