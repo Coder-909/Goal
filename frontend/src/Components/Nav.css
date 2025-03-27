@@ -1,0 +1,39 @@
+.navbar{
+    position: relative;
+    width: 100vw;
+    height: 10vh;
+    background-color: #252141;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: aliceblue;
+}
+
+h2{
+    font-size: 3em;
+    font-weight: 300;
+    font-style: italic;    
+}
+
+button{
+   font-size: 1.7em;
+   font-weight: 300;
+   border: 0 solid black;
+   border-radius: 7px;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   padding-left: 1.8em;
+   padding-right: 1.8em;
+   }
+
+.btn{
+    display: flex;
+    gap: 2em;
+    margin-right: 9em;
+}
+
+.menus{
+    width: 3em;
+}
+    
+

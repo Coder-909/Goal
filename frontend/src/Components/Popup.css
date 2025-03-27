@@ -1,0 +1,10 @@
+.popup{
+    position: absolute;
+    width: 57vw;
+    height: 76vh;
+    display: block;
+    border-radius: 1em;
+    background-color:rgb(198, 208, 216) ;
+    top: 6vw;
+    left: 25vw;
+}

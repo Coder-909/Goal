@@ -1,17 +1,16 @@
 import React from 'react'
 import './Nav.css'
-
+import svg from '../assets/menu.svg'
 const Nav = () => {
   return (
-    <div>
-      <div className='abc flex justify-between w-full h-8em bg-amber-200'>
-
-        <h1>Goals</h1>
-        <div>
-        <button>Incomplete</button>
-        <button>Complete</button>
-        </div>
-        
+    <div className='navbar'>
+      <div className='flex  gap-15 items-center '>
+      <img className='menus' src={svg} alt="" />
+      <h2> Goals</h2>
+      </div>
+      <div className='btn'>
+        <button  className='btn1'>INCOMPLETE</button>
+        <button  className='btn2  bg-white  text-black'>COMPLETE</button>
       </div>
     </div>
   )
