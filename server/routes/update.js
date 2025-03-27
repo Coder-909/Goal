@@ -17,11 +17,11 @@ router.get('/', (req, res) => {
   res.send('Birds home page')
 })
 
-router.post('/create', async (req, res) => {
-    let e = await CreateGoal.create({
-      task:    "tanmay",
+router.get('/create', async (req, res) => {
+    let e = await CreateGoal.updateOne({
+      task:    "",
       isDone: false,
-      deadline: "23 may"
+      deadline: ""
     })
     console.log(e)
 

@@ -2,7 +2,7 @@ import express from "express"
 const app = express()
 const port = 5000
 import Create from "./routes/create.js"
-app.use('/create', Create);
+app.use('/api', Create);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
