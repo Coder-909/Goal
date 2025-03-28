@@ -20,7 +20,7 @@
 }
 
 .popup .head{
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 700;
     padding:3vh 3vw;
     background-image: linear-gradient(to right, #6B01BC, #A455F9);
@@ -40,21 +40,22 @@
     background-color: transparent;
     color:#6B01BC;
     border-bottom: 2px solid #6B01BC;
-    font-size:1.5em;
-    padding:4px 6px;
+    font-size:1.3em;
+    padding:4px 4px;
 }
 
 .popup form label{
     color:#6B01BC;
-    font-size: 2.5em;
+    font-size: 1em;
+    
 }
 
 .popup form .calendar{
-    width:35vw;
+    width:30vw;
     font-size: 0.7em;
     border:1px solid #6B01BC;
     border-radius: 15px;
-    padding:5px 15px;
+    padding:0px 3px;
     color:white;
     background: linear-gradient(135deg, #6B01BC, #A455F9);
     box-shadow: 0 0 20px white;
@@ -65,8 +66,8 @@
     box-shadow: inset 10px 10px 20px rgba(0, 0, 0, 0.3); 
 }
 .react-calendar {
-    width: 350px;
-    max-width: 100%;
+    /* width: 350px; */
+    width: 80%;
     background: white;
     border: none;
     border-radius: 10px;
@@ -124,6 +125,7 @@
 }
 
 .popup form .submit{
+    font-size: 1.3em;
     color:#6B01BC;
     font-weight: 500;
     background: none;
