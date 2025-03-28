@@ -4,7 +4,137 @@
     height: 76vh;
     display: block;
     border-radius: 1em;
-    background-color:rgb(198, 208, 216) ;
+    background-color:rgb(215, 222, 228) ;
     top: 6vw;
     left: 25vw;
+    z-index: 5;
+}
+
+.backdrop{
+    background: rgba(0, 0, 0, 0.76);
+    position: absolute;
+    height:100vh;
+    width:100vw;
+    transform: translate(0%,-100%);
+    z-index: 2;
+}
+
+.popup .head{
+    font-size: 3em;
+    font-weight: 700;
+    padding:3vh 3vw;
+    background-image: linear-gradient(to right, #6B01BC, #A455F9);
+    color:white;
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+}
+
+.popup form{
+    margin:2vh 4vw;
+    display:flex;
+    flex-direction:column ;
+    gap:2vh;
+}
+
+.popup form input{
+    background-color: transparent;
+    color:#6B01BC;
+    border-bottom: 2px solid #6B01BC;
+    font-size:1.5em;
+    padding:4px 6px;
+}
+
+.popup form label{
+    color:#6B01BC;
+    font-size: 2.5em;
+}
+
+.popup form .calendar{
+    width:35vw;
+    font-size: 0.7em;
+    border:1px solid #6B01BC;
+    border-radius: 15px;
+    padding:5px 15px;
+    color:white;
+    background: linear-gradient(135deg, #6B01BC, #A455F9);
+    box-shadow: 0 0 20px white;
+    transition: box-shadow .5;
+}
+
+.popup form .calendar:hover{
+    box-shadow: inset 10px 10px 20px rgba(0, 0, 0, 0.3); 
+}
+.react-calendar {
+    width: 350px;
+    max-width: 100%;
+    background: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+/* Navigation buttons */
+.react-calendar__navigation button {
+    color: #fcfcfc;
+    font-size: 16px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin:0 10px;
+}
+
+.react-calendar__navigation button:hover {
+    background: white;
+    color:#A455F9;
+    border-radius: 5px;
+}
+
+/* Days of the week */
+.react-calendar__month-view__weekdays {
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 12px;
+    display: flex;
+    margin:0 10px;
+    gap:5px;
+}
+
+/* Day cells */
+.react-calendar__tile {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.react-calendar__tile:enabled:hover {
+    background: #ffffff;
+    color: #6B01BC;
+    font-size: 1.2em;
+}
+
+.react-calendar__tile--active {
+    background: #ffffff;
+    color: #6B01BC;
+    font-size: 1.3em;
+}
+
+.popup form .submit{
+    color:#6B01BC;
+    font-weight: 500;
+    background: none;
+    padding:0.7em;
+    border:2px solid #6B01BC;
+    border-radius: 15px;
+    transition: all .5;
+}
+
+.popup form .submit:hover{
+    background: linear-gradient(to right, #6B01BC, #A455F9);
+    color:white;
+    cursor: pointer;
 }

@@ -1,34 +1,53 @@
 import React, { useState } from 'react'
 import './Popup.css'
+import {Calendar} from "react-calendar";
 
 const Popup = () => {
+  const [task, setTask] = useState('');
+  const [date,setDate] = useState(new Date());
 
-  
-const [username, setusername] = useState('');
-
-  const submitHandler=(e)=>{
+  const submitHandler=async(e)=>{
     e.preventDefault()
-    console.log(username);
-    setusername('')
-      
+    const goal = {
+      task:task,
+      deadline:date,
+      isDone:false
+    }
+    console.log(goal);
+    const res = await fetch("http://localhost:3000/api/createtask", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(goal)
+    })
+
+    const data = await res.json();
+    console.log({success:true,message:"Task created succesfully",data:data})
+    setTask("");
   }
 
   return (
-    <div className='popup'>
-      <h1 className='text-[#6B01BC] text-2xl font-semibold '>ADD TASK</h1>
-      <form onSubmit={(e)=>[
-        submitHandler(e)
-      ]} >
-        <input value={username}
-        onChange={(e)=>{          
-          setusername(e.target.value);          
-        }} 
-         type="text" placeholder='Enter your task' className='bg-white px-4 py-4 text-xl m-5 rounded'/>
-        <button  className='bg-emerald-600 rounded px-4 py-3 font-semibold text-xl m-5'>Add task</button>
-
-      </form>
-      
-    </div>
+    <>
+      <div className='backdrop'></div>
+      <div className='popup'>
+        <h1 className='head'>ADD TASK</h1>
+        <form onSubmit={(e)=>[
+          submitHandler(e)
+        ]} >
+          <label>Task name:</label>
+          <input value={task}
+          onChange={(e)=>{          
+            setTask(e.target.value);          
+          }} 
+          type="text" placeholder='Enter your task' className='bg-white px-4 py-4 text-xl m-5 rounded'/>
+          <label>Deadline:</label>
+          <Calendar onChange={setDate} value={date} className="calendar"/>
+          <button type="submit" className='submit bg-emerald-600 rounded px-4 py-3 font-semibold text-xl m-5'>Add task</button>
+        </form>
+        
+      </div>
+    </>
   )
 }
 
