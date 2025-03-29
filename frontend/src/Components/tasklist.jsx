@@ -6,8 +6,8 @@ const Tasklist = (props) => {
   return (
     <div className='task'>
     {props.taskName}
-    <EditIcon  style={{ fontSize: 30, color: 'white', marginLeft:'8em'}}/>
-    <DeleteIcon  style={{ fontSize: 30, color: 'white' }}/>
+    <EditIcon  style={{ fontSize: 30, color: 'white', marginLeft:'23em'}}/>
+    <DeleteIcon  style={{ fontSize: 30, color: 'white', marginLeft:'7px' }}/>
     </div>
   )
 }
