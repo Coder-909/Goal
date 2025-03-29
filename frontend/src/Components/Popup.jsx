@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import './Popup.css'
 import {Calendar} from "react-calendar";
-import {motion} from 'motion/react'
+import {motion} from 'motion/react';
 
-
-
-const Popup = () => {
+const Popup = ({popupShow}) => {
   const [task, setTask] = useState('');
   const [date,setDate] = useState(new Date());
 
@@ -31,9 +29,9 @@ const Popup = () => {
   }
 
   return (
-    <>
-      <div className='backdrop'></div>
-      <div className='popup'>
+    <div>
+      <div className={popupShow ? "backdrop" : "backdrop hideBackdrop"}></div>
+      <div className={popupShow ? "popup" : "popup hidePopup"}>
         <h1 className='head'>ADD TASK</h1>
         <form onSubmit={(e)=>[
           submitHandler(e)
@@ -50,7 +48,7 @@ const Popup = () => {
         </form>
         
       </div>
-    </>
+    </div>
   )
 }
 

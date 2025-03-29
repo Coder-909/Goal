@@ -6,6 +6,7 @@ import Popup from './Components/Popup'
 
 const App = () => {
   const [navbarShow, setNavbarShow] = useState(true);
+  const [popupShow, setPopupShow] = useState(false);
 
   const toggleSideBar=() => {
     setNavbarShow(!navbarShow);
@@ -15,8 +16,8 @@ const App = () => {
     <div>
       <Nav toggleSideBar={toggleSideBar}/>
       <Sidebars show={navbarShow}/>
-      <Main navbarShow={navbarShow}/>
-      {/* <Popup/> */}
+      <Main setPopupShow={setPopupShow} navbarShow={navbarShow}/>
+      <Popup popupShow={popupShow}/>
     </div>
   )
 }

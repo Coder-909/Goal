@@ -4,7 +4,7 @@ import svg from '../assets/add.svg'
 import Tasklist from './Tasklist.jsx';
 import axios from 'axios'
 
-const Main = ({navbarShow}) => {
+const Main = ({navbarShow,setPopupShow}) => {
   const [tasks , settasks]=useState([])
 
   useEffect(async() => {
@@ -12,11 +12,16 @@ const Main = ({navbarShow}) => {
     const data= response.data
     settasks(data.data)
   }, []);
+
+  const showPopup = () => {
+    setPopupShow(true);
+  }
+
   return (
     <div className='ma'>
       <div className='buttons'>
-        <button  className='button add'><span>Add task</span><img className='plus' src={svg} alt="" /></button>
-        <button  className='button edit'>Edit</button>
+        <button onClick={showPopup} className='button add'><span>Add task</span><img className='plus' src={svg} alt="" /></button>
+        <button className='button edit'>Edit</button>
       </div>
       <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{

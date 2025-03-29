@@ -8,6 +8,12 @@
     top: 6vw;
     left: 25vw;
     z-index: 5;
+    transition: all .2;
+    scale:1;
+}
+
+.hidePopup{
+    scale:0;
 }
 
 .backdrop{
