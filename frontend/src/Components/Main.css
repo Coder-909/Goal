@@ -1,66 +1,59 @@
+.ma{
+    position:absolute;
+    right:5vw;
+    display:flex;
+    flex-direction:column;
+    gap:2.5vh;
+}
+
+.ma .buttons{
+    margin:2vh 0 0 0;
+    display: flex;
+    justify-content: end;
+    gap:2vw;
+}
+
+.ma .buttons .button{
+    padding:10px 20px;
+    font-size: 1.5em;
+    font-weight: 400;
+    min-width: 6vw;
+    background-color: aqua;
+    color: white;
+    border-radius: 10px;
+    background: linear-gradient(to right, #6B01BC, #A455F9);
+}
+
 .add{
-    position: absolute;
-    width: 11vw;
-    height: 7vh;
-    background-color: aqua;
-    top: 14vh;
-    left: 79vw;
-    font-size: 1.5em;
-    padding-left: 0;
-    padding-right: 0;
-    font-weight: 400;
-    color: white;
-    background: linear-gradient(to right, #6B01BC, #A455F9);
+    display: flex;
+    flex-direction: row;
 }
 
-.edit{
-    position: absolute;
-    width: 4vw;
-    height: 7vh;
-    background-color: aqua;
-    top: 14vh;
-    left: 92vw;
-    font-size: 1.5em;
-    padding-left: 0;
-    padding-right: 0;
-    font-weight: 400;
-    color: white;
-    background: linear-gradient(to right, #6B01BC, #A455F9);
-}
-
-.plus{
-    position: absolute;
-    width: 1.4em;
-    top: 1.3vh;
-    left: 17.9vh;
-}
-
-.box{
-    position: absolute;
-    top: 11em;
-    left: 25em;
+.tasksBox{
     width: 70vw;
     min-height: 40vh;
     background-color: #252141;
     border-radius: 10px;
+    display: flex;
+    flex-direction:column;
+    gap:2.5vh;
+    padding:3.5vh 2vw;
+    transition: all .3s;
 }
 
-.bars{
-        margin-top: 1.5em;
-        margin-left: 1.5em;
-        margin-right: 1.5em;
-        height: 6vh;
-        position: relative;
-        background-color: aliceblue;
-        color: white;
-        margin-bottom: 1em;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 20px;
-        font-size: 1.4em;
-        border:0 solid white;
-        border-radius: .4em;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        background: linear-gradient(to right, #6B01BC, #A455F9);
-     
+.tasksBox .task{
+    height: 6vh;
+    color: white;
+    align-content: center;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    font-size: 1.4em;
+    border-radius: .4em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: linear-gradient(to right, #6B01BC, #A455F9);
+}
+
+.long{
+    width:92vw;
 }

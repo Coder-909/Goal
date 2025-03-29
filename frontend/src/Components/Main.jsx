@@ -4,32 +4,25 @@ import svg from '../assets/add.svg'
 import Tasklist from './Tasklist.jsx';
 import axios from 'axios'
 
-const Main = () => {
-
+const Main = ({navbarShow}) => {
   const [tasks , settasks]=useState([])
 
   useEffect(async() => {
     let response= await axios.get('http://localhost:3000/api/readtask') 
-
     const data= response.data
-    console.log(data.data);
     settasks(data.data)
-    
-    
   }, []);
   return (
     <div className='ma'>
-      <button  className='add'>Add task <img className='plus' src={svg} alt="" /></button>
-      <button  className='edit'>Edit</button>
-
-      <div className='box'>
+      <div className='buttons'>
+        <button  className='button add'><span>Add task</span><img className='plus' src={svg} alt="" /></button>
+        <button  className='button edit'>Edit</button>
+      </div>
+      <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{
-
-          return <Tasklist taskName={elem.task}/>
+          return <Tasklist id={elem._id} taskName={elem.task}/>
         })}
       </div>
-
-
     </div>
   )
 }

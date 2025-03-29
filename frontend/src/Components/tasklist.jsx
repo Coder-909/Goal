@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Tasklist = ({taskName}) => {
+const Tasklist = (props) => {
   return (
-    <div className='bars'>
-    {taskName}
+    <div className='task'>
+    {props.taskName}
     </div>
   )
 }

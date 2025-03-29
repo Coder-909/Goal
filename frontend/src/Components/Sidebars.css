@@ -1,21 +1,27 @@
 .Sidebars{
-    position: relative;
+    position: fixed;
     width: 24vw;
     height: calc(100vh - 10vh);
     background-color: #252141;
-    display: block;
-    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    gap:1.4vh;
+    padding:1vh 1vw;
+    transition: all .3s;
+}
+
+.hide{
+    transform: translateX(-100%);
 }
 
 .side{
     height: 6vh;
-    position: relative;
+    display:block;
+    align-content: center;
+    padding:0 1vw;
+    cursor:pointer;
     background-color: aliceblue;
     color: white;
-    margin-bottom: 1em;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-left: 20px;
     font-size: 1.4em;
     border:0 solid white;
     border-radius: .4em;
