@@ -17,7 +17,7 @@ const App = () => {
       <Nav toggleSideBar={toggleSideBar}/>
       <Sidebars show={navbarShow}/>
       <Main setPopupShow={setPopupShow} navbarShow={navbarShow}/>
-      <Popup popupShow={popupShow}/>
+      <Popup popupShow={popupShow} setPopupShow={setPopupShow}/>
     </div>
   )
 }

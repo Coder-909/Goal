@@ -18,14 +18,20 @@
 
 .backdrop{
     background: rgba(0, 0, 0, 0.76);
-    position: absolute;
+    position: fixed;
     height:100vh;
     width:100vw;
-    transform: translate(0%,-100%);
-    z-index: 2;
+    transform: translateY(-10vh);
+    z-index: 5;
+}
+
+.hideBackdrop{
+    display: none;
 }
 
 .popup .head{
+    display: flex;
+    justify-content: space-between;
     font-size: 2em;
     font-weight: 700;
     padding:3vh 3vw;
@@ -33,6 +39,10 @@
     color:white;
     border-top-left-radius:15px;
     border-top-right-radius:15px;
+}
+
+.popup .head .close-icon{
+    cursor: pointer;
 }
 
 .popup form{

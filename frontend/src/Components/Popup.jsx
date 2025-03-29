@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import './Popup.css'
 import {Calendar} from "react-calendar";
 import {motion} from 'motion/react';
+import CloseIcon from '@mui/icons-material/Close';
 
-const Popup = ({popupShow}) => {
+const Popup = ({popupShow,setPopupShow}) => {
   const [task, setTask] = useState('');
   const [date,setDate] = useState(new Date());
 
@@ -14,7 +15,6 @@ const Popup = ({popupShow}) => {
       deadline:date,
       isDone:false
     }
-    console.log(goal);
     const res = await fetch("http://localhost:3000/api/createtask", {
       method:"POST",
       headers:{
@@ -24,7 +24,6 @@ const Popup = ({popupShow}) => {
     })
 
     const data = await res.json();
-    console.log({success:true,message:"Task created succesfully",data:data})
     setTask("");
   }
 
@@ -32,16 +31,23 @@ const Popup = ({popupShow}) => {
     <div>
       <div className={popupShow ? "backdrop" : "backdrop hideBackdrop"}></div>
       <div className={popupShow ? "popup" : "popup hidePopup"}>
-        <h1 className='head'>ADD TASK</h1>
-        <form onSubmit={(e)=>[
+        <div className='head'>
+          <h1>ADD TASK</h1>
+          <CloseIcon className="close-icon" onClick={()=>{
+            setPopupShow(false)
+          }} style={{ fontSize: 60, color: 'white' }} />
+        </div>
+        <form onSubmit={(e)=>{
           submitHandler(e)
-        ]} >
+        }}>
           <label>Task name:</label>
           <input value={task}
-          onChange={(e)=>{          
-            setTask(e.target.value);          
-          }} 
-          type="text" placeholder='Enter your task' className='bg-white px-4 py-4 text-xl m-5 rounded'/>
+            onChange={(e)=>{
+              setTask(e.target.value);
+            }}
+            type="text" 
+            placeholder='Enter your task' 
+            className='bg-white px-4 py-4 text-xl m-5 rounded'/>
           <label>Deadline:</label>
           <Calendar onChange={setDate} value={date} className="calendar"/>
           <motion.button type="submit" className='submit bg-emerald-600 rounded px-4 py-3 font-semibold text-xl m-5' drag>Add task</motion.button>
