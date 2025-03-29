@@ -40,7 +40,7 @@
     top: 11em;
     left: 25em;
     width: 70vw;
-    height: 40vh;
+    min-height: 40vh;
     background-color: #252141;
     border-radius: 10px;
 }

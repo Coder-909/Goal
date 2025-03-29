@@ -1,11 +1,11 @@
 import React from 'react'
 
-const tasklist = () => {
+const Tasklist = ({taskName}) => {
   return (
     <div className='bars'>
-    Watch movie
+    {taskName}
     </div>
   )
 }
 
-export default tasklist
+export default Tasklist
