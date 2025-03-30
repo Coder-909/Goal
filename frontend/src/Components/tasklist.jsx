@@ -9,11 +9,10 @@ const Tasklist = (props) => {
   
   const [isChecked, setIsChecked] = useState(props.data.isDone);
 
-const handleClick = async(isdone) => {
+  const handleClick = async(isdone) => {
     let updateTask = props.data;
     updateTask['isDone'] = isdone;
     const id = props.id;
-    console.log(id);
     const res = await fetch(`http://localhost:3000/api/updatetask/${id}`,{
       method:"PUT",
       headers:{
@@ -22,9 +21,6 @@ const handleClick = async(isdone) => {
       body:JSON.stringify(updateTask)
     });
     const data = await res.json();
-    console.log(updateTask);
-    console.log({success:true,message:"Updated succesfully"});
-
   }
 
   const toggleCheckbox = () => {
