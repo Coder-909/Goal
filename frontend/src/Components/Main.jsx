@@ -25,7 +25,7 @@ const Main = ({navbarShow,setPopupShow}) => {
       </div>
       <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{
-          return <Tasklist id={elem._id} taskName={elem.task}/>
+          return <Tasklist id={elem._id} data={elem}/>
         })}
       </div>
     </div>

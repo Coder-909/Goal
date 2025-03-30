@@ -15,11 +15,17 @@
     user-select: none;
   }
 
-  .checkbox.checked {
-    background-color:  #252141;
-    /* color: aliceblue; */
-    border: 1px solid;
-    border-color: #ffffff;
-  }
+.checkbox.checked {
+  background-color:  #252141;
+  /* color: aliceblue; */
+  border: 1px solid;
+  border-color: #ffffff;
+}
+
+.isDone div{
+  text-decoration: line-through;
+  text-decoration-color: #252141;
+  text-decoration-thickness: 3px;
+}
 
   

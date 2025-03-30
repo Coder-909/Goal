@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check'
@@ -7,31 +7,45 @@ import './Tasklist.css'
 
 const Tasklist = (props) => {
   
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(props.data.isDone);
+
+const handleClick = async(isdone) => {
+    let updateTask = props.data;
+    updateTask['isDone'] = isdone;
+    const id = props.id;
+    console.log(id);
+    const res = await fetch(`http://localhost:3000/api/updatetask/${id}`,{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify(updateTask)
+    });
+    const data = await res.json();
+    console.log(updateTask);
+    console.log({success:true,message:"Updated succesfully"});
+
+  }
 
   const toggleCheckbox = () => {
-    setIsChecked((prevState) => !prevState); // Flip the state between true/false
+    setIsChecked((prevState) => !prevState);
+    handleClick(!isChecked); // Flip the state between true/false
   };
 
   return (
-    <div className='task flex justify-between items-center'>
-      
-    <div className='flex gap-3 items-center'>
-       
-    <div className="checkbox-container" onClick={toggleCheckbox}>
-      <div className={`checkbox flex ${isChecked ? 'checked' : ''}`}>
-        {isChecked && <CheckIcon style={{ fontSize: 23, color: 'white' }} />} 
+    <div className={`task flex justify-between items-center ${isChecked ? 'isDone' : ''}`}>
+      <div className='flex gap-3 items-center'>
+        <div className="checkbox-container" onClick={toggleCheckbox}>
+          <div className={`checkbox flex ${isChecked ? 'checked' : ''}`}>
+            {isChecked && <CheckIcon style={{ fontSize: 23, color: 'white' }} />} 
+          </div>
+        </div>
+        {props.data.task}
+      </div>    
+      <div className='flex items-center gap-3'>
+        <EditIcon  style={{ fontSize: 30, color: 'white'}}/>
+        <DeleteIcon  style={{ fontSize: 30, color: 'white' }}/>
       </div>
-    </div>
-
-     {props.taskName}
-    </div>
-     
-     <div className='flex items-center gap-3'>
-    <EditIcon  style={{ fontSize: 30, color: 'white'}}/>
-    <DeleteIcon  style={{ fontSize: 30, color: 'white' }}/>
-
-     </div>
     </div>
   )
 }
