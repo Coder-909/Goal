@@ -1,0 +1,25 @@
+.checkbox{
+    width: 1em;
+    background-color:white ;
+    height: 1em;
+    /* margin-top: 9px; */
+    border-radius: 5px;
+    margin-right: 1px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .checkbox.checked {
+    background-color:  #252141;
+    /* color: aliceblue; */
+    border: 1px solid;
+    border-color: #ffffff;
+  }
+
+  
