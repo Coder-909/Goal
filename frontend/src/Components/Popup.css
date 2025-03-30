@@ -13,7 +13,7 @@
 }
 
 .hidePopup{
-    scale:0;
+    display:none;
 }
 
 .backdrop{
