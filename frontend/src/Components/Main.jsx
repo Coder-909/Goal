@@ -3,9 +3,11 @@ import './Main.css'
 import svg from '../assets/add.svg'
 import Tasklist from './Tasklist.jsx';
 import axios from 'axios'
+import Popup from './Popup'
 
-const Main = ({navbarShow,setPopupShow}) => {
+const Main = ({navbarShow}) => {
   const [tasks , settasks]=useState([])
+  const [popupShow, setPopupShow] = useState(false);
 
   const handleDelete = (id) => {
     let newTasks = tasks.filter(task => task._id !== id);
@@ -30,6 +32,7 @@ const Main = ({navbarShow,setPopupShow}) => {
 
   return (
     <div className='ma'>
+      <Popup handleCreation={handleCreation} popupShow={popupShow} setPopupShow={setPopupShow}/>
       <div className='buttons'>
         <button onClick={showPopup} className='button add'><span>Add task</span><img className='plus' src={svg} alt="" /></button>
         <button className='button edit'>Edit</button>
@@ -37,8 +40,7 @@ const Main = ({navbarShow,setPopupShow}) => {
       <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{
           return <Tasklist 
-                    handleUpdate={handleDelete} 
-                    handleCreation={handleCreation}
+                    handleUpdate={handleDelete}
                     id={elem._id} 
                     data={elem}/>
         })}

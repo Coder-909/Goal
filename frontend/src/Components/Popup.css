@@ -1,15 +1,10 @@
 .popup{
-    position: absolute;
-    width: 57vw;
-    height: 76vh;
-    display: block;
+    position: fixed;
     border-radius: 1em;
     background-color:rgb(215, 222, 228) ;
-    top: 6vw;
-    left: 25vw;
+    min-width: 50vw;
     z-index: 5;
     transition: all .2;
-    scale:1;
 }
 
 .hidePopup{
@@ -21,8 +16,9 @@
     position: fixed;
     height:100vh;
     width:100vw;
-    transform: translateY(-10vh);
+    transform: translate(-25vw,-10vh);
     z-index: 5;
+    backdrop-filter: blur(19px);
 }
 
 .hideBackdrop{
@@ -62,7 +58,7 @@
 
 .popup form label{
     color:#6B01BC;
-    font-size: 1em;
+    font-size: 1.5em;
     
 }
 

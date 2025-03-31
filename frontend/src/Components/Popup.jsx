@@ -4,7 +4,7 @@ import {Calendar} from "react-calendar";
 import {motion} from 'motion/react';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Popup = ({popupShow,setPopupShow}) => {
+const Popup = ({popupShow,setPopupShow,handleCreation}) => {
   const [task, setTask] = useState('');
   const [date,setDate] = useState(new Date());
 
@@ -25,6 +25,7 @@ const Popup = ({popupShow,setPopupShow}) => {
 
     const data = await res.json();
     setTask("");
+    handleCreation(data.data);
   }
 
   return (
