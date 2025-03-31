@@ -7,6 +7,17 @@ import axios from 'axios'
 const Main = ({navbarShow,setPopupShow}) => {
   const [tasks , settasks]=useState([])
 
+  const handleDelete = (id) => {
+    let newTasks = tasks.filter(task => task._id !== id);
+    settasks(newTasks);
+  }
+
+  const handleCreation = (newTask) => {
+    let newTasks = tasks;
+    newTasks.push(newTask);
+    settasks(newTasks);
+  }
+
   useEffect(async() => {
     let response= await axios.get('http://localhost:3000/api/readtask') 
     const data= response.data
@@ -25,7 +36,11 @@ const Main = ({navbarShow,setPopupShow}) => {
       </div>
       <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{
-          return <Tasklist id={elem._id} data={elem}/>
+          return <Tasklist 
+                    handleUpdate={handleDelete} 
+                    handleCreation={handleCreation}
+                    id={elem._id} 
+                    data={elem}/>
         })}
       </div>
     </div>
