@@ -23,7 +23,7 @@ const Tasklist = (props) => {
       body:JSON.stringify(updateTask)
     });
     const data = await res.json();
-    props.handleUpdate();
+    props.handleDelete();
   }
 
   const handleEdit = async () => {
@@ -36,12 +36,8 @@ const Tasklist = (props) => {
         body: JSON.stringify(updatedTask),
     });
     setIsEditing(false);
-    props.handleUpdate();
+    props.handleUpdate(props.id,updatedTask);
     console.log('successfully edited');
-};
-
-const focusInput = () => {
-  inputRef.current.focus();
 };
 
   const handleDelete = async() =>{
@@ -49,7 +45,7 @@ const focusInput = () => {
       method:"DELETE"
     })
     console.log(props.task, " succefully deleted");
-    props.handleUpdate(id);
+    props.handleDelete(id);
   }
 
   const toggleCheckbox = () => {
@@ -69,25 +65,27 @@ const focusInput = () => {
           <input 
             type="text"
             value={editedTask}
-            // ref={inputRef}
             onChange={(e)=>setEditedTask(e.target.value)}
-          
+            className='editInput'
           />
         ) : (
-          <div>{props.data.task}</div>
+          <div className='taskname'>{props.data.task}</div>
         )}
       </div>    
         
-      <div className='flex items-center gap-3'>
-      <button onClick={handleEdit} className='border rounded-xl bg-blue-800'>Done</button>
-        <EditIcon 
-        onClick= {()=>{
-          // focusInput   
-          setIsEditing(true);
-          setEditedTask(props.data.task);
-          
-        }}
-        style={{ fontSize: 30, color: 'white'}}/>
+      <div className='task-btns flex items-center gap-3'>
+        {!isEditing ? (
+          <EditIcon 
+          onClick= {()=>{
+            setIsEditing(true);
+            setEditedTask(props.data.task);
+            
+          }}
+          style={{ fontSize: 30, color: 'white'}}/>
+        ) : (
+          <button onClick={handleEdit} className='doneBtn'>Done</button>
+        )}
+        
         <DeleteIcon onClick={handleDelete} style={{ fontSize: 30, color: 'white' }}/>
       </div>
     </div>

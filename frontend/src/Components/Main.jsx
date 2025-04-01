@@ -5,7 +5,7 @@ import Tasklist from './Tasklist.jsx';
 import axios from 'axios'
 import Popup from './Popup'
 
-const Main = ({navbarShow}) => {
+const Main = ({navbarShow,complete,incomplete}) => {
   const [tasks , settasks]=useState([])
   const [popupShow, setPopupShow] = useState(false);
 
@@ -14,17 +14,40 @@ const Main = ({navbarShow}) => {
     settasks(newTasks);
   }
 
-  const handleCreation = (newTask) => {
+  const handleUpdate = (id,newTask) => {
+    let newTasks = tasks.map(elem => {
+      if(elem._id == id){
+        return newTask;
+      }
+      return elem;
+    });
+    settasks(newTasks);
+  }
+
+  const handleCreation = (newTask) => { 
     let newTasks = tasks;
     newTasks.push(newTask);
     settasks(newTasks);
   }
 
-  useEffect(async() => {
-    let response= await axios.get('http://localhost:3000/api/readtask') 
-    const data= response.data
-    settasks(data.data)
-  }, []);
+  useEffect(() => {
+    const handleRender = async() => {
+      let response= await axios.get('http://localhost:3000/api/readtask') 
+      const data= response.data;
+      let renderData = data.data.map((elem) => {
+        if(elem.isDone === complete){
+          return elem;
+        }else if(elem.isDone === !incomplete){
+          return elem;
+        }else{
+          return elem;
+        }
+      })
+      console.log(renderData);
+      settasks(renderData);
+    };
+    handleRender();
+  },[complete,incomplete])
 
   const showPopup = () => {
     setPopupShow(true);
@@ -39,10 +62,25 @@ const Main = ({navbarShow}) => {
       </div>
       <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{
-          return <Tasklist 
-                    handleUpdate={handleDelete}
-                    id={elem._id} 
-                    data={elem}/>
+          if(complete && (elem.isDone)){
+            return <Tasklist 
+                      handleUpdate={handleUpdate}
+                      handleDelete={handleDelete}
+                      id={elem._id} 
+                      data={elem}/>
+          }else if(incomplete && !(elem.isDone)){
+            return <Tasklist 
+                      handleUpdate={handleUpdate}
+                      handleDelete={handleDelete}
+                      id={elem._id} 
+                      data={elem}/>
+          }else{
+            return <Tasklist 
+                      handleUpdate={handleUpdate}
+                      handleDelete={handleDelete}
+                      id={elem._id} 
+                      data={elem}/>
+          }
         })}
       </div>
     </div>

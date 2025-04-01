@@ -2,18 +2,7 @@ import React,{useState} from 'react'
 import './Nav.css'
 import svg from '../assets/menu.svg'
 
-const Nav = ({toggleSideBar}) => {
-  const [complete,setComplete] = useState(false);
-  const [incomplete,setIncomplete] = useState(false);
-
-  const toggleComplete = () => {
-    setIncomplete(false);
-    setComplete(!complete);
-  }
-  const toggleIncomplete = () => {
-    setIncomplete(!incomplete);
-    setComplete(false);
-  }
+const Nav = ({toggleSideBar,complete,incomplete,toggleComplete,toggleIncomplete}) => {
 
   return (
     <div className='navbar'>
