@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Main.css'
 import svg from '../assets/add.svg'
-import Tasklist from './Tasklist.jsx';
+import Tasklist from './tasklist.jsx'
 import axios from 'axios'
 import Popup from './Popup'
 

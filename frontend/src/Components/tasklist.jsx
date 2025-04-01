@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check'
+import { motion } from 'framer-motion';
 
 import './Tasklist.css'
 
@@ -10,7 +11,14 @@ const Tasklist = (props) => {
   const [isChecked, setIsChecked] = useState(props.data.isDone);
   const [isEditing , setIsEditing]= useState(false);
   const [editedTask , setEditedTask]= useState(props.data.task)
-  // const inputRef=useRef(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+
+ const deleteIconVariants={
+  initial : {y:0},
+  hover :{scale:1.2},
+  clicked :{y:-30 , opacity:0 ,  transition:{duration:0.5}},
+ }
 
   const handleClick = async(isdone) => {
     let updateTask = props.data;
@@ -41,11 +49,16 @@ const Tasklist = (props) => {
 };
 
   const handleDelete = async() =>{
-    await fetch(`http://localhost:3000/api/deletetask/${id}`,{
-      method:"DELETE"
-    })
-    console.log(props.task, " succefully deleted");
-    props.handleDelete(id);
+    setIsDeleting(true);
+
+    setTimeout(async() => {
+      
+      await fetch(`http://localhost:3000/api/deletetask/${id}`,{
+        method:"DELETE"
+      })
+      console.log(props.task, " succefully deleted");
+      props.handleDelete(id);
+    },300);
   }
 
   const toggleCheckbox = () => {
@@ -73,7 +86,7 @@ const Tasklist = (props) => {
         )}
       </div>    
         
-      <div className='task-btns flex items-center gap-3'>
+      <div className={`task-btns flex items-center gap-3 `}>
         {!isEditing ? (
           <EditIcon 
           onClick= {()=>{
@@ -85,8 +98,18 @@ const Tasklist = (props) => {
         ) : (
           <button onClick={handleEdit} className='doneBtn'>Done</button>
         )}
-        
-        <DeleteIcon onClick={handleDelete} style={{ fontSize: 30, color: 'white' }}/>
+        <motion.div
+        variants={deleteIconVariants}
+        initial='initial'
+        animate={isDeleting?"clicked" : "initial"}
+        whileHover={"hover"}
+        onClick={handleDelete}
+
+        >
+
+        <DeleteIcon  style={{ fontSize: 30, color: 'white' }}/>
+        </motion.div>
+
       </div>
     </div>
   )
