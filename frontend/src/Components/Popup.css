@@ -16,7 +16,6 @@
     position: fixed;
     height:100vh;
     width:100vw;
-    transform: translate(-25vw,-10vh);
     z-index: 5;
     backdrop-filter: blur(19px);
 }

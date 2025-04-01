@@ -5,7 +5,7 @@ import Tasklist from './tasklist.jsx'
 import axios from 'axios'
 import Popup from './Popup'
 
-const Main = ({timeFilter,navbarShow,complete,incomplete}) => {
+const Main = ({timeFilter,navbarShow,complete,incomplete,forcedUpdate}) => {
   const [tasks , settasks]=useState([])
   const [popupShow, setPopupShow] = useState(false);
 
@@ -39,7 +39,6 @@ const Main = ({timeFilter,navbarShow,complete,incomplete}) => {
 
     const lastDayOfWeek = new Date(currentDate);
     lastDayOfWeek.setDate(currentDate.getDate() + (6 - currentDate.getDay())); // Set to Saturday
-    console.log(date,firstDayOfWeek.getMonth());
     if(firstDayOfWeek.getMonth() === lastDayOfWeek.getMonth()){
       return date >= firstDayOfWeek.getDate() && date <= lastDayOfWeek.getDate();
     }else if(firstDayOfWeek.getMonth() < month){
@@ -106,7 +105,8 @@ const Main = ({timeFilter,navbarShow,complete,incomplete}) => {
           return <Tasklist 
                     handleUpdate={handleUpdate}
                     handleDelete={handleDelete}
-                    id={elem._id} 
+                    forcedUpdate={forcedUpdate}
+                    key={elem._id} 
                     data={elem}/>
           
         })}

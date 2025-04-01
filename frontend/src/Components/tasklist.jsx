@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import './Tasklist.css'
 
 const Tasklist = (props) => {
-  const id = props.id;
   const [isChecked, setIsChecked] = useState(props.data.isDone);
   const [isEditing , setIsEditing]= useState(false);
   const [editedTask , setEditedTask]= useState(props.data.task)
@@ -39,7 +38,7 @@ const Tasklist = (props) => {
   const handleClick = async(isdone) => {
     let updateTask = props.data;
     updateTask['isDone'] = isdone;
-    const res = await fetch(`http://localhost:3000/api/updatetask/${id}`,{
+    const res = await fetch(`http://localhost:3000/api/updatetask/${props.data._id}`,{
       method:"PUT",
       headers:{
         "Content-Type":"application/json",
@@ -52,7 +51,7 @@ const Tasklist = (props) => {
 
   const handleEdit = async () => {
     const updatedTask = { ...props.data, task: editedTask }; 
-    await fetch(`http://localhost:3000/api/updatetask/${props.id}`, {
+    await fetch(`http://localhost:3000/api/updatetask/${props.data._id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
@@ -60,28 +59,27 @@ const Tasklist = (props) => {
         body: JSON.stringify(updatedTask),
     });
     setIsEditing(false);
-    props.handleUpdate(props.id,updatedTask);
+    props.handleUpdate(props.data._id,updatedTask);
     console.log('successfully edited');
 };
 
   const handleDelete = async() =>{
     setIsDeleting(true);
-
     setTimeout(async() => {
       
-      await fetch(`http://localhost:3000/api/deletetask/${id}`,{
+      await fetch(`http://localhost:3000/api/deletetask/${props.data._id}`,{
         method:"DELETE"
       })
-      console.log(props.task, " succefully deleted");
       props.handleDelete(id);
+      props.forcedUpdate();
     },300);
+
   }
 
   const toggleCheckbox = () => {
     setIsChecked((prevState) => !prevState);
     handleClick(!isChecked); // Flip the state between true/false
   };
-
   return (
     <motion.div 
     variants={deleteIconVariants}

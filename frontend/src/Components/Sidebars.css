@@ -1,5 +1,6 @@
 .Sidebars{
     position: fixed;
+    top:10vh;
     width: 24vw;
     height: calc(100vh - 10vh);
     background-color: #252141;

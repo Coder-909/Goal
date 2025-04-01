@@ -1,5 +1,5 @@
 .navbar{
-    position: relative;
+    position: fixed;
     width: 100vw;
     height: 10vh;
     background-color: #252141;
@@ -8,6 +8,7 @@
     justify-content: space-between;
     align-items: center;
     color: aliceblue;
+    z-index: 10;
 }
 
 .navbar .leftSide{
