@@ -5,7 +5,7 @@ import Main from './Components/Main'
 
 const App = () => {
   const [navbarShow, setNavbarShow] = useState(true);
-  const [complete,setComplete] = useState(true);
+  const [complete,setComplete] = useState(false);
   const [incomplete,setIncomplete] = useState(false);
 
   const toggleSideBar=() => {
