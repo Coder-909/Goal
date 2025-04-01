@@ -14,9 +14,16 @@ const Tasklist = (props) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
 
+  const editIconVariants={
+    initial : {scale:1 , rotate:0},
+    hover :{scale:1.2 , rotate:10 , transition:{duration:0.3}},
+    clicked :{scale:0.9 , rotate:-10 , transition:{duration:0.2}},
+   }
+
+
  const deleteIconVariants={
   initial : {y:0},
-  hover :{scale:1.2},
+  hover :{scale:1.02},
   clicked :{y:-30 , opacity:0 ,  transition:{duration:0.5}},
  }
 
@@ -67,7 +74,14 @@ const Tasklist = (props) => {
   };
 
   return (
-    <div className={`task flex justify-between items-center ${isChecked ? 'isDone' : ''}`}>
+    <motion.div 
+    variants={deleteIconVariants}
+    initial='initial'
+    animate={isDeleting?"clicked" : "initial"}
+    whileHover={"hover"}
+    
+
+    className={`task flex justify-between items-center ${isChecked ? 'isDone' : ''}`}>
       <div className='flex gap-3 items-center'>
         <div className="checkbox-container" onClick={toggleCheckbox}>
           <div className={`checkbox flex ${isChecked ? 'checked' : ''}`}>
@@ -88,30 +102,30 @@ const Tasklist = (props) => {
         
       <div className={`task-btns flex items-center gap-3 `}>
         {!isEditing ? (
-          <EditIcon 
-          onClick= {()=>{
-            setIsEditing(true);
-            setEditedTask(props.data.task);
-            
-          }}
-          style={{ fontSize: 30, color: 'white'}}/>
+          <motion.div
+          variants={editIconVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="click"
+          >
+
+            <EditIcon className='cursor-pointer'
+            onClick= {()=>{
+              setIsEditing(true);
+              setEditedTask(props.data.task);
+              
+            }}
+            style={{ fontSize: 30, color: 'white'}}/>
+          </motion.div>
         ) : (
           <button onClick={handleEdit} className='doneBtn'>Done</button>
         )}
-        <motion.div
-        variants={deleteIconVariants}
-        initial='initial'
-        animate={isDeleting?"clicked" : "initial"}
-        whileHover={"hover"}
-        onClick={handleDelete}
-
-        >
-
-        <DeleteIcon  style={{ fontSize: 30, color: 'white' }}/>
-        </motion.div>
+  
+          <DeleteIcon className='cursor-pointer' onClick={handleDelete}  style={{ fontSize: 30, color: 'white' }}/>
+       
 
       </div>
-    </div>
+    </motion.div>
   )
 }
 
