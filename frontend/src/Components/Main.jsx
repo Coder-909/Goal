@@ -45,7 +45,7 @@ const Main = ({timeFilter,navbarShow,complete,incomplete}) => {
     }else if(firstDayOfWeek.getMonth() < month){
       return date <= firstDayOfWeek.getDate() && date <= lastDayOfWeek.getDate();
     }else if (month < lastDayOfWeek.getMonth()){
-      return ;
+      return date>= firstDayOfWeek.getDate() && date >= lastDayOfWeek.getDate();
     }
   };
   
@@ -71,8 +71,8 @@ const Main = ({timeFilter,navbarShow,complete,incomplete}) => {
           let deadline = new Date(task.deadline);
           let date = deadline.getDate();
           let month = deadline.getMonth();
-          console.log(isDateInCurrentWeek(date,month));
-          if(isDateInCurrentWeek(date) && year === currentDate.getFullYear()){
+          let year = deadline.getFullYear();
+          if(isDateInCurrentWeek(date,month) && year === currentDate.getFullYear()){
             return task;
           }
         })
