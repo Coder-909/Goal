@@ -13,6 +13,15 @@ const Tasklist = (props) => {
   const [editedTask , setEditedTask]= useState(props.data.task)
   const [isDeleting, setIsDeleting] = useState(false);
 
+  let deadline = new Date(props.data.deadline);
+  let date = deadline.getDate();
+  let month = deadline.getMonth();
+  let year = deadline.getFullYear();
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ]
+  const uiDeadline = `${date} ${months[month]}, ${year}`;
 
   const editIconVariants={
     initial : {scale:1 , rotate:0},
@@ -100,11 +109,11 @@ const Tasklist = (props) => {
         )}
       </div>    
         
-      <div className={`task-btns flex items-center gap-3 `}>
+      <div className={`task-btns flex items-center gap-4 `}>
 
         {!isEditing && (
            <div className='deadline text-white text-sm'>
-            {props.data.deadline ? `Due ${props.data.deadline}` : 'No deadline'}
+            {props.data.deadline ? `Due ${uiDeadline}` : 'No deadline'}
            </div>
         )}
 
