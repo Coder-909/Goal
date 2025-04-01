@@ -101,6 +101,13 @@ const Tasklist = (props) => {
       </div>    
         
       <div className={`task-btns flex items-center gap-3 `}>
+
+        {!isEditing && (
+           <div className='deadline text-white text-sm'>
+            {props.data.deadline ? `Due ${props.data.deadline}` : 'No deadline'}
+           </div>
+        )}
+
         {!isEditing ? (
           <motion.div
           variants={editIconVariants}
