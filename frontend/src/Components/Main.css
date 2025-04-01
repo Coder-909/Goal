@@ -31,7 +31,7 @@
 
 .tasksBox{
     width: 70vw;
-    min-height: 40vh;
+    min-height: 12vh;
     background-color: #252141;
     border-radius: 10px;
     display: flex;
