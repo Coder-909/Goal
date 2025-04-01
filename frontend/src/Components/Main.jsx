@@ -5,14 +5,17 @@ import Tasklist from './tasklist.jsx'
 import axios from 'axios'
 import Popup from './Popup'
 
-const Main = ({navbarShow,complete,incomplete}) => {
+const Main = ({timeFilter,navbarShow,complete,incomplete}) => {
   const [tasks , settasks]=useState([])
   const [popupShow, setPopupShow] = useState(false);
+
+  const currentDate = new Date();
 
   const handleDelete = (id) => {
     let newTasks = tasks.filter(task => task._id !== id);
     settasks(newTasks);
   }
+
 
   const handleUpdate = (id,newTask) => {
     let newTasks = tasks.map(elem => {
@@ -30,24 +33,63 @@ const Main = ({navbarShow,complete,incomplete}) => {
     settasks(newTasks);
   }
 
+  const isDateInCurrentWeek = (date,month) => {
+    const firstDayOfWeek = new Date(currentDate);
+    firstDayOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Set to Sunday
+
+    const lastDayOfWeek = new Date(currentDate);
+    lastDayOfWeek.setDate(currentDate.getDate() + (6 - currentDate.getDay())); // Set to Saturday
+    console.log(date,firstDayOfWeek.getMonth());
+    if(firstDayOfWeek.getMonth() === lastDayOfWeek.getMonth()){
+      return date >= firstDayOfWeek.getDate() && date <= lastDayOfWeek.getDate();
+    }else if(firstDayOfWeek.getMonth() < month){
+      return date <= firstDayOfWeek.getDate() && date <= lastDayOfWeek.getDate();
+    }else if (month < lastDayOfWeek.getMonth()){
+      return ;
+    }
+  };
+  
   useEffect(() => {
     const handleRender = async() => {
       let response= await axios.get('http://localhost:3000/api/readtask') 
       const data= response.data;
-      // console.log(complete,incomplete);
-      // console.log((!complete && !incomplete))
       let renderData = data.data.filter(task => 
         ((complete && task.isDone) || (incomplete && !task.isDone)) || (!complete && !incomplete)
       )
-      console.log(renderData);
-      const deadline = new Date(renderData[0].deadline);
-      const date = deadline.getDate();
-      const month = deadline.getMonth();
-      console.log("date",date)
+      if(timeFilter==="Today"){
+        renderData = renderData.filter(task => {
+          let deadline = new Date(task.deadline);
+          let date = deadline.getDate();
+          let month = deadline.getMonth();
+          let year = deadline.getFullYear();
+          if(date === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()){
+            return task;
+          }
+        })
+      }else if(timeFilter === "This week"){
+        renderData = renderData.filter(task => {
+          let deadline = new Date(task.deadline);
+          let date = deadline.getDate();
+          let month = deadline.getMonth();
+          console.log(isDateInCurrentWeek(date,month));
+          if(isDateInCurrentWeek(date) && year === currentDate.getFullYear()){
+            return task;
+          }
+        })
+      }else if(timeFilter === "This month"){
+        renderData = renderData.filter(task => {
+          let deadline = new Date(task.deadline);
+          let month = deadline.getMonth();
+          let year = deadline.getFullYear();
+          if(month === currentDate.getMonth() && year === currentDate.getFullYear()){
+            return task;
+          }
+        })
+      }
       settasks(renderData);
     };
     handleRender();
-  },[complete,incomplete])
+  },[complete,incomplete,timeFilter])
 
   const showPopup = () => {
     setPopupShow(true);

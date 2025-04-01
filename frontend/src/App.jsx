@@ -7,6 +7,7 @@ const App = () => {
   const [navbarShow, setNavbarShow] = useState(true);
   const [complete,setComplete] = useState(false);
   const [incomplete,setIncomplete] = useState(false);
+  const [timeFilter, setTimeFilter] = useState("All time");
 
   const toggleSideBar=() => {
     setNavbarShow(!navbarShow);
@@ -26,13 +27,22 @@ const App = () => {
     <div>
       <Nav
         toggleSideBar={toggleSideBar}
-        complete={complete} 
-        incomplete={incomplete} 
+        complete={complete}
+        incomplete={incomplete}
         toggleComplete={toggleComplete}
         toggleIncomplete={toggleIncomplete}
       />
-      <Sidebars show={navbarShow}/>
-      <Main complete={complete} incomplete={incomplete} navbarShow={navbarShow}/>
+      <Sidebars 
+        show={navbarShow}
+        timeFilter={timeFilter}
+        setTimeFilter={setTimeFilter}
+      />
+      <Main 
+        complete={complete} 
+        incomplete={incomplete} 
+        navbarShow={navbarShow}
+        timeFilter={timeFilter}
+      />
     </div>
   )
 }

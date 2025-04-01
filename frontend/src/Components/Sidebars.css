@@ -26,5 +26,11 @@
     border:0 solid white;
     border-radius: .4em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background: linear-gradient(to right, #6B01BC, #A455F9);
+    background: linear-gradient(to right,#a455f998, #6B01BC98);
+    transition: background .2s;
+}
+
+.active{
+    background: linear-gradient(to right,#A455F9, #6B01BC);
+ 
 }
