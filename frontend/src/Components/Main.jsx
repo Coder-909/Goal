@@ -34,16 +34,16 @@ const Main = ({navbarShow,complete,incomplete}) => {
     const handleRender = async() => {
       let response= await axios.get('http://localhost:3000/api/readtask') 
       const data= response.data;
-      let renderData = data.data.map((elem) => {
-        if(elem.isDone === complete){
-          return elem;
-        }else if(elem.isDone === !incomplete){
-          return elem;
-        }else{
-          return elem;
-        }
-      })
+      // console.log(complete,incomplete);
+      // console.log((!complete && !incomplete))
+      let renderData = data.data.filter(task => 
+        ((complete && task.isDone) || (incomplete && !task.isDone)) || (!complete && !incomplete)
+      )
       console.log(renderData);
+      const deadline = new Date(renderData[0].deadline);
+      const date = deadline.getDate();
+      const month = deadline.getMonth();
+      console.log("date",date)
       settasks(renderData);
     };
     handleRender();
@@ -62,25 +62,12 @@ const Main = ({navbarShow,complete,incomplete}) => {
       </div>
       <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{
-          if(complete && (elem.isDone)){
-            return <Tasklist 
-                      handleUpdate={handleUpdate}
-                      handleDelete={handleDelete}
-                      id={elem._id} 
-                      data={elem}/>
-          }else if(incomplete && !(elem.isDone)){
-            return <Tasklist 
-                      handleUpdate={handleUpdate}
-                      handleDelete={handleDelete}
-                      id={elem._id} 
-                      data={elem}/>
-          }else{
-            return <Tasklist 
-                      handleUpdate={handleUpdate}
-                      handleDelete={handleDelete}
-                      id={elem._id} 
-                      data={elem}/>
-          }
+          return <Tasklist 
+                    handleUpdate={handleUpdate}
+                    handleDelete={handleDelete}
+                    id={elem._id} 
+                    data={elem}/>
+          
         })}
       </div>
     </div>
