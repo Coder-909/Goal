@@ -34,12 +34,16 @@ const Main = ({navbarShow,complete,incomplete}) => {
     const handleRender = async() => {
       let response= await axios.get('http://localhost:3000/api/readtask') 
       const data= response.data;
-      console.log(complete,incomplete);
-      console.log((!complete && !incomplete))
+      // console.log(complete,incomplete);
+      // console.log((!complete && !incomplete))
       let renderData = data.data.filter(task => 
         ((complete && task.isDone) || (incomplete && !task.isDone)) || (!complete && !incomplete)
       )
       console.log(renderData);
+      const deadline = new Date(renderData[0].deadline);
+      const date = deadline.getDate();
+      const month = deadline.getMonth();
+      console.log("date",date)
       settasks(renderData);
     };
     handleRender();
