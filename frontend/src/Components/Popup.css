@@ -1,9 +1,12 @@
 .popup{
     position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
     border-radius: 1em;
     background-color:rgb(215, 222, 228) ;
-    min-width: 50vw;
-    z-index: 5;
+    min-width: 40vw;
+    z-index: 15;
     transition: all .2;
 }
 
@@ -15,8 +18,10 @@
     background: rgba(0, 0, 0, 0.76);
     position: fixed;
     height:100vh;
+    top:0;
+    left:0;
     width:100vw;
-    z-index: 5;
+    z-index: 12;
     backdrop-filter: blur(19px);
 }
 
@@ -27,7 +32,7 @@
 .popup .head{
     display: flex;
     justify-content: space-between;
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: 700;
     padding:3vh 3vw;
     background-image: linear-gradient(to right, #6B01BC, #A455F9);
@@ -41,7 +46,7 @@
 }
 
 .popup form{
-    margin:2vh 4vw;
+    margin:2vh 4vw 7vh 4vw;
     display:flex;
     flex-direction:column ;
     gap:2vh;
@@ -62,7 +67,7 @@
 }
 
 .popup form .calendar{
-    width:30vw;
+    width:27vw;
     font-size: 0.7em;
     border:1px solid #6B01BC;
     border-radius: 15px;
