@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check'
@@ -8,6 +8,9 @@ import './Tasklist.css'
 const Tasklist = (props) => {
   const id = props.id;
   const [isChecked, setIsChecked] = useState(props.data.isDone);
+  const [isEditing , setIsEditing]= useState(false);
+  const [editedTask , setEditedTask]= useState(props.data.task)
+  // const inputRef=useRef(null);
 
   const handleClick = async(isdone) => {
     let updateTask = props.data;
@@ -22,6 +25,24 @@ const Tasklist = (props) => {
     const data = await res.json();
     props.handleUpdate();
   }
+
+  const handleEdit = async () => {
+    const updatedTask = { ...props.data, task: editedTask }; 
+    await fetch(`http://localhost:3000/api/updatetask/${props.id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedTask),
+    });
+    setIsEditing(false);
+    props.handleUpdate();
+    console.log('successfully edited');
+};
+
+const focusInput = () => {
+  inputRef.current.focus();
+};
 
   const handleDelete = async() =>{
     await fetch(`http://localhost:3000/api/deletetask/${id}`,{
@@ -44,10 +65,29 @@ const Tasklist = (props) => {
             {isChecked && <CheckIcon style={{ fontSize: 23, color: 'white' }} />} 
           </div>
         </div>
-        {props.data.task}
+        {isEditing ? (
+          <input 
+            type="text"
+            value={editedTask}
+            // ref={inputRef}
+            onChange={(e)=>setEditedTask(e.target.value)}
+          
+          />
+        ) : (
+          <div>{props.data.task}</div>
+        )}
       </div>    
+        
       <div className='flex items-center gap-3'>
-        <EditIcon  style={{ fontSize: 30, color: 'white'}}/>
+      <button onClick={handleEdit} className='border rounded-xl bg-blue-800'>Done</button>
+        <EditIcon 
+        onClick= {()=>{
+          // focusInput   
+          setIsEditing(true);
+          setEditedTask(props.data.task);
+          
+        }}
+        style={{ fontSize: 30, color: 'white'}}/>
         <DeleteIcon onClick={handleDelete} style={{ fontSize: 30, color: 'white' }}/>
       </div>
     </div>

@@ -35,7 +35,7 @@ const Main = ({navbarShow}) => {
       <Popup handleCreation={handleCreation} popupShow={popupShow} setPopupShow={setPopupShow}/>
       <div className='buttons'>
         <button onClick={showPopup} className='button add'><span>Add task</span><img className='plus' src={svg} alt="" /></button>
-        <button className='button edit'>Edit</button>
+        {/* <button className='button edit'>Edit</button> */}
       </div>
       <div className={navbarShow ? 'tasksBox' : 'tasksBox long'}>
         {tasks.map((elem,idx)=>{
