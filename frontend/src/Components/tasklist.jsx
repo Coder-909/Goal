@@ -70,7 +70,7 @@ const Tasklist = (props) => {
       await fetch(`http://localhost:3000/api/deletetask/${props.data._id}`,{
         method:"DELETE"
       })
-      props.handleDelete(id);
+      props.handleDelete(props.data._id);
       props.forcedUpdate();
     },300);
 
